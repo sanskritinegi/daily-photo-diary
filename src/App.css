@@ -1,0 +1,66 @@
+/* Scrapbook-inspired aesthetic - Mobile First */
+.app {
+  min-height: 100vh;
+  background: #fafafa;
+  position: relative;
+  padding-bottom: 100px; /* Space for fixed button */
+}
+
+/* Subtle paper texture */
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.015) 1px,
+      rgba(0, 0, 0, 0.015) 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.015) 1px,
+      rgba(0, 0, 0, 0.015) 2px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-header {
+  display: none; /* Hide title/subtitle for cleaner look */
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 0;
+}
+
+.storage-warning {
+  display: none; /* Hide storage warning for cleaner UI */
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default button styles */
+button {
+  font-family: 'Patrick Hand', cursive;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .app {
+    padding-bottom: 90px;
+  }
+}

@@ -1,0 +1,205 @@
+.day-cell {
+  aspect-ratio: 1;
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  margin: -1px 0 0 -1px;
+}
+
+.day-cell:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.day-cell.today {
+  border: 1px solid #000;
+  margin: -1px 0 0 -1px;
+}
+
+.day-cell.other-month {
+  opacity: 0.3;
+  background: #f9f9f9;
+}
+
+.day-cell.has-photo {
+  padding: 0;
+  border: 1px solid #000;
+}
+
+.day-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 10px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 60%, transparent 100%);
+  color: white;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 12px;
+  pointer-events: none;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.day-name {
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  opacity: 1;
+  font-size: 13px;
+}
+
+.day-number {
+  font-weight: 400;
+  font-size: 13px;
+  opacity: 1;
+}
+
+.day-cell:not(.has-photo) .day-header {
+  background: none;
+  color: #999;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.day-cell:not(.has-photo) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.day-cell:not(.has-photo) .day-name {
+  opacity: 0.5;
+  color: #999;
+}
+
+.day-cell:not(.has-photo) .day-number {
+  opacity: 0.5;
+  color: #999;
+}
+
+/* Today - black text when no photo */
+.day-cell.today:not(.has-photo) .day-header {
+  color: #000;
+}
+
+.day-cell.today:not(.has-photo) .day-name,
+.day-cell.today:not(.has-photo) .day-number {
+  color: #000;
+  opacity: 1;
+}
+
+/* Past dates - black text when no photo */
+.day-cell.past:not(.has-photo) .day-header {
+  color: #000;
+}
+
+.day-cell.past:not(.has-photo) .day-name,
+.day-cell.past:not(.has-photo) .day-number {
+  color: #000;
+  opacity: 1;
+}
+
+/* Future dates - disabled cursor and prevent selection */
+.day-cell.future:not(.has-photo) {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.day-cell.future:not(.has-photo):hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.photo-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.day-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal-photo {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-delete,
+.btn-cancel {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.btn-delete {
+  background: #ff4444;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #cc0000;
+}
+
+.btn-cancel {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+}
