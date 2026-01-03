@@ -4,6 +4,7 @@ import { startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import { db, getMonthPhotos, deletePhoto } from '../utils/db';
 import { getAbbreviatedMonthName, formatDate } from '../utils/dateHelpers';
 import DayCell from './DayCell';
+import ExportButton from './ExportButton';
 import './CalendarView.css';
 
 const CalendarView = ({ selectedDate, onDateSelect, onDateChange }) => {
@@ -91,21 +92,24 @@ const CalendarView = ({ selectedDate, onDateSelect, onDateChange }) => {
       onTouchEnd={onTouchEnd}
     >
       <div className="calendar-header">
-        <button 
-          className="month-nav prev" 
-          onClick={handlePrevMonth}
-          aria-label="Previous month"
-        >
-          ←
-        </button>
-        <h2 className="month-title">{monthName}</h2>
-        <button 
-          className="month-nav next" 
-          onClick={handleNextMonth}
-          aria-label="Next month"
-        >
-          →
-        </button>
+        <div className="header-left">
+          <button 
+            className="month-nav prev" 
+            onClick={handlePrevMonth}
+            aria-label="Previous month"
+          >
+            ←
+          </button>
+          <h2 className="month-title">{monthName}</h2>
+          <button 
+            className="month-nav next" 
+            onClick={handleNextMonth}
+            aria-label="Next month"
+          >
+            →
+          </button>
+        </div>
+        <ExportButton currentYear={year} currentMonth={month} />
       </div>
 
       <div className="calendar-grid">
