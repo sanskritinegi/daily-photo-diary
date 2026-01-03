@@ -92,8 +92,45 @@ const ExportButton = ({ currentYear, currentMonth }) => {
           const img = new Image();
           await new Promise((resolve, reject) => {
             img.onload = () => {
-              // Draw photo to fill cell
-              ctx.drawImage(img, x, y, cellSize, cellSize);
+              // Save context state
+              ctx.save();
+              
+              // Clip to cell boundaries to prevent bleeding
+              ctx.beginPath();
+              ctx.rect(x, y, cellSize, cellSize);
+              ctx.clip();
+              
+              // Calculate aspect ratios
+              const imgAspect = img.width / img.height;
+              const cellAspect = 1; // Square cell
+              
+              let drawWidth = cellSize;
+              let drawHeight = cellSize;
+              let drawX = x;
+              let drawY = y;
+              
+              // Fill cell while maintaining aspect ratio (crop if needed)
+              if (imgAspect > cellAspect) {
+                // Image is wider - fit height, crop width
+                drawHeight = cellSize;
+                drawWidth = cellSize * imgAspect;
+                drawX = x - (drawWidth - cellSize) / 2;
+              } else {
+                // Image is taller - fit width, crop height
+                drawWidth = cellSize;
+                drawHeight = cellSize / imgAspect;
+                drawY = y - (drawHeight - cellSize) / 2;
+              }
+              
+              // Enable image smoothing for better quality
+              ctx.imageSmoothingEnabled = true;
+              ctx.imageSmoothingQuality = 'high';
+              
+              // Draw photo to fill cell (cropped to center, but clipped to boundaries)
+              ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+              
+              // Restore context state (removes clipping)
+              ctx.restore();
               
               // Overlay gradient for text readability
               const gradient = ctx.createLinearGradient(x, y, x, y + 30);
